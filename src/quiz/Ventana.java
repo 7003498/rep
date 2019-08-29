@@ -6,13 +6,14 @@
 package quiz;
 
 import java.awt.Color;
+import javax.swing.JOptionPane;
 
 /**
  *
  * @author Estudiante
  */
 public class Ventana extends javax.swing.JFrame {
-
+    
     Fraccion f1;
     int nun = 0;
     public Ventana() {
@@ -37,6 +38,7 @@ public class Ventana extends javax.swing.JFrame {
         jLabel1 = new javax.swing.JLabel();
         jTextField1 = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
+        jLabel2 = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -61,31 +63,37 @@ public class Ventana extends javax.swing.JFrame {
             }
         });
 
+        jLabel2.setText("Ingrese las fracciones separadas por un espacio");
+
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(jLabel1)
+                .addGap(0, 0, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
                 .addContainerGap(81, Short.MAX_VALUE)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(90, 90, 90))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(79, 79, 79))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addContainerGap())))
+                    .addGroup(jPanel2Layout.createSequentialGroup()
+                        .addGap(219, 219, 219)
+                        .addComponent(jButton1))
+                    .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 231, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel2)))
+                .addContainerGap())
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(20, 20, 20)
+                .addContainerGap()
                 .addComponent(jLabel1)
+                .addGap(7, 7, 7)
+                .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jButton1)
                 .addContainerGap(23, Short.MAX_VALUE))
         );
@@ -127,16 +135,19 @@ public class Ventana extends javax.swing.JFrame {
     }//GEN-LAST:event_jTextField1ActionPerformed
 
     private void jButton1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jButton1MouseClicked
-        Double auxN[] = null; 
-        final int n = 2;
-        String[] split = jTextField1.getText().split("+",n);
-        String aux[] = split[1].split("/",4);
-        for(int i = 0; i < 4;i++){
-            auxN[i] = Double.parseDouble(aux[i]);
-        }
-        f1.setFraccion1(auxN[1], auxN[2]);
-        f1.setFraccion2(auxN[3], auxN[4]);
-         
+        double auxN[] = new double[4]; 
+        
+        String[] split = jTextField1.getText().split(" ",2);
+        
+        String aux1[] = split[0].split("/",2);
+        String aux2[] = split[1].split("/",2);
+        
+        f1.setFraccion1(Double.parseDouble(aux1[0]), Double.parseDouble(aux1[1]));
+        f1.setFraccion2(Double.parseDouble(aux2[0]), Double.parseDouble(aux2[1]));
+        f1.setFraccion3(Double.parseDouble(aux1[0]),Double.parseDouble(aux1[1]),Double.parseDouble(aux2[0]),Double.parseDouble(aux2[1]));
+        
+        JOptionPane.showMessageDialog(null, "El resultado es: "+f1.sumaDecimal()+" o "+f1.getNumerador()+"/"+f1.getDenomidor());
+        dispose();
     }//GEN-LAST:event_jButton1MouseClicked
 
     private void jPanel1MouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseClicked
@@ -157,9 +168,7 @@ public class Ventana extends javax.swing.JFrame {
         if(nun == 3){
             nun = 0;
         }
-        
-        
-        
+ 
     }//GEN-LAST:event_jPanel1MouseClicked
 
     /**
@@ -200,6 +209,7 @@ public class Ventana extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JTextField jTextField1;
